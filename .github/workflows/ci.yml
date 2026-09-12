@@ -1,16 +1,10 @@
 name: CI
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-
+# MARKER_STATE_A  (benign revision)
+on: {push: {branches: [main]}}
 permissions: {}
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: echo build
+      - run: echo A
