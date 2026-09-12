@@ -1,10 +1,14 @@
 name: CI
-# MARKER_STATE_A  (benign revision)
-on: {push: {branches: [main]}}
-permissions: {}
+# MARKER_STATE_B  (deliberately unsafe revision for TOCTOU test)
+on:
+  pull_request_target:
+    branches: [main]
+permissions: write-all
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: echo A
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - run: echo B
