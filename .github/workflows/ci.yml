@@ -1,14 +1,17 @@
 name: CI
-# MARKER_STATE_B  (deliberately unsafe revision for TOCTOU test)
+
 on:
-  pull_request_target:
+  push:
     branches: [main]
-permissions: write-all
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
 jobs:
-  build:
+  noop:
     runs-on: ubuntu-latest
+    if: false
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - run: echo B
+      - run: echo "pentest fixture - disabled"
